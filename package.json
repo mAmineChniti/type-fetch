@@ -8,7 +8,11 @@
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"files": ["dist", "README.md", "LICENSE"],
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
 	"scripts": {
 		"build": "tsc -p .",
 		"ts:init": "tsc --init",
@@ -16,7 +20,14 @@
 		"lint": "biome lint --write .",
 		"test": "jest"
 	},
-	"keywords": ["http", "client", "typescript", "library", "request", "fetch"],
+	"keywords": [
+		"http",
+		"client",
+		"typescript",
+		"library",
+		"request",
+		"fetch"
+	],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {

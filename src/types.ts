@@ -4,6 +4,7 @@
 export interface TFetchClientOptions {
 	/** Enable or disable debug logging. */
 	debug?: boolean;
+	headers: HeadersInit;
 	retry: {
 		/** Number of retry attempts for failed requests. @default 0 */
 		count?: number;
