@@ -2,33 +2,30 @@
  * Interface defining the configuration options for the TFetchClient.
  */
 export interface TFetchClientOptions {
-	/** Enable or disable debug logging. */
-	debug?: boolean;
-	headers: HeadersInit;
-	retry: {
-		/** Number of retry attempts for failed requests. @default 0 */
-		count?: number;
-		/** Delay between retry attempts in milliseconds. @default 1 second */
-		delay?: number;
-		/** Callback function executed on each retry. @default undefined */
-		onRetry?: () => void;
-	};
-	cache: {
-		/** Enable or disable caching for GET requests. @default false */
-		enabled?: boolean;
-		/** Maximum age for cache entries in milliseconds. @default 5 minutes */
-		maxAge?: number;
-		/**
-		 * Maximum number of cache entries before a cleanup is triggered.
-		 *
-		 * It is important to know the larger this size the more memory the library will use.
-		 * So keeping this small can help reduce memory usage on lower-end servers. When this
-		 * limit is hit, a cleanup is triggered and the oldest entries are remove on the next cache save.
-		 *
-		 * @default 5,000
-		 */
-		maxCachedEntries?: number;
-	};
+  /** Enable or disable debug logging. */
+  debug?: boolean;
+  /** Default headers to be included in all requests. */
+  headers?: HeadersInit;
+  retry: {
+    /** Number of retry attempts for failed requests. @default 0 */
+    count?: number;
+    /** Delay between retry attempts in milliseconds. @default 1 second */
+    delay?: number;
+    /** Callback function executed on each retry. @default undefined */
+    onRetry?: () => void;
+  };
+  cache: {
+    /** Enable or disable caching for GET requests. @default false */
+    enabled?: boolean;
+    /** Maximum age for cache entries in milliseconds. @default 5 minutes */
+    maxAge?: number;
+    /**
+     * Maximum number of cache entries before a cleanup is triggered.
+     * When this limit is hit, a cleanup is triggered and the oldest 25% of entries are removed.
+     * @default 5,000
+     */
+    maxCachedEntries?: number;
+  };
 }
 
 /**
@@ -53,8 +50,8 @@ export type ContentType = "json" | "form" | "text" | "blob";
  * @template T The type of the data being wrapped.
  */
 export interface ContentWrapper<T> {
-	type: ContentType;
-	data: T;
+  type: ContentType;
+  data: T;
 }
 
 /**
@@ -62,20 +59,21 @@ export interface ContentWrapper<T> {
  * @template T The type of the data stored in the cache.
  */
 export interface CacheEntry<T> {
-	data: T;
-	timestamp: number;
+  data: T;
+  timestamp: number;
 }
 
 /**
  * An error class for TFetchClient.
  * @param message The error message.
+ * @param statusCode Optional HTTP status code associated with the error.
  * @returns A new TFetchError instance.
  */
 export class TFetchError extends Error {
-	constructor(message: string) {
-		super(message);
-		this.name = "TFetchError";
-	}
+  constructor(message: string, public readonly statusCode?: number) {
+    super(message);
+    this.name = "TFetchError";
+  }
 }
 
 export const DEFAULT_RETRY_COUNT = 0;
@@ -86,8 +84,8 @@ export const DEFAULT_MAX_CACHED_ENTRIES = 5000;
  * Enumeration of time constants in milliseconds.
  */
 export enum Time {
-	Second = 1000,
-	Minute = 60 * Time.Second,
-	Hour = 60 * Time.Minute,
-	Day = 24 * Time.Hour,
+  Second = 1000,
+  Minute = 60 * Time.Second,
+  Hour = 60 * Time.Minute,
+  Day = 24 * Time.Hour,
 }
