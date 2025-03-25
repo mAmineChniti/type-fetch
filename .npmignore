@@ -1,8 +1,12 @@
-node_modues/
+node_modules/
 biome.json
-pnpm.lock.yaml
+pnpm-lock.yaml
 tsconfig.json
 lib/
 test/
 *.test.ts
 *.log
+.github/
+scripts/
+.gitattributes
+.gitignore
