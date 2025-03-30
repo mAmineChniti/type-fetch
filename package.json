@@ -1,6 +1,6 @@
 {
 	"name": "@thatguyjamal/type-fetch",
-	"version": "0.2.0",
+	"version": "1.0.0",
 	"description": "A lightweight, zero-dependency HTTP client library for making API requests in JavaScript/TypeScript.",
 	"repository": {
 		"type": "git",
@@ -8,7 +8,11 @@
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"files": ["dist", "README.md", "LICENSE"],
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
 	"scripts": {
 		"build": "tsc -p ./tsconfig.json && tsc-alias -p ./tsconfig.json",
 		"ts:init": "tsc --init",
@@ -16,7 +20,14 @@
 		"lint": "biome lint --write .",
 		"test": "jest"
 	},
-	"keywords": ["http", "client", "typescript", "library", "request", "fetch"],
+	"keywords": [
+		"http",
+		"client",
+		"typescript",
+		"library",
+		"request",
+		"fetch"
+	],
 	"author": "Jamal Lyons",
 	"license": "MIT",
 	"sideEffects": false,
@@ -34,5 +45,6 @@
 		"tsc-alias": "^1.8.8",
 		"tsconfig-paths-webpack-plugin": "^4.1.0",
 		"typescript": "^5.5.4"
-	}
+	},
+	"packageManager": "pnpm@10.6.2+sha512.47870716bea1572b53df34ad8647b42962bc790ce2bf4562ba0f643237d7302a3d6a8ecef9e4bdfc01d23af1969aa90485d4cebb0b9638fa5ef1daef656f6c1b"
 }
