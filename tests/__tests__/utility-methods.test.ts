@@ -32,9 +32,7 @@ describe("TFetchClient Utility Methods", () => {
 			const blobHeaders = (tfetch as any).getHeaders("blob");
 
 			expect(jsonHeaders).toEqual({ "Content-Type": "application/json" });
-			expect(formHeaders).toEqual({
-				"Content-Type": "application/x-www-form-urlencoded",
-			});
+			expect(formHeaders).toEqual({});
 			expect(textHeaders).toEqual({ "Content-Type": "text/plain" });
 			expect(blobHeaders).toEqual({
 				"Content-Type": "application/octet-stream",
