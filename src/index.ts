@@ -241,7 +241,7 @@ class TFetchClient {
 	): Promise<Result<T>> {
 		const mergedHeaders = this.mergeHeaders(
 			this.config.headers ?? {},
-			this.getHeaders(body.type),
+			this.getHeaders(body.type, body.data),
 			options?.headers ?? {},
 		);
 		const actualBody = this.prepareBody(body);
@@ -294,7 +294,7 @@ class TFetchClient {
 	): Promise<Result<T>> {
 		const mergedHeaders = this.mergeHeaders(
 			this.config.headers ?? {},
-			this.getHeaders(body.type),
+			this.getHeaders(body.type, body.data),
 			options?.headers ?? {},
 		);
 		const actualBody = this.prepareBody(body);
@@ -347,7 +347,7 @@ class TFetchClient {
 	): Promise<Result<T>> {
 		const mergedHeaders = this.mergeHeaders(
 			this.config.headers ?? {},
-			this.getHeaders(body.type),
+			this.getHeaders(body.type, body.data),
 			options?.headers ?? {},
 		);
 		const actualBody = this.prepareBody(body);
@@ -670,7 +670,15 @@ class TFetchClient {
 	 * @param type The content type for which headers are needed.
 	 * @returns An object representing the headers.
 	 */
-	private getHeaders(type: ContentType): HeadersInit {
+	private getHeaders(type: ContentType, data?: unknown): HeadersInit {
+		if (
+			(type === "form" || type === "multipart") &&
+			typeof FormData !== "undefined" &&
+			data instanceof FormData
+		) {
+			// Let the browser set Content-Type (with boundary)
+			return {};
+		}
 		return (
 			{
 				json: { "Content-Type": "application/json" },

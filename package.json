@@ -10,7 +10,7 @@
 	"types": "dist/index.d.ts",
 	"files": ["dist", "README.md", "LICENSE"],
 	"scripts": {
-		"build": "tsc -p ./tsconfig.json && tsc-alias -p ./tsconfig.json",
+		"build": "tsc -p ./tsconfig.build.json && tsc-alias -p ./tsconfig.json",
 		"ts:init": "tsc --init",
 		"format": "biome format --write .",
 		"lint": "biome lint --write .",
@@ -35,5 +35,5 @@
 		"tsconfig-paths-webpack-plugin": "4.2.0",
 		"typescript": "5.8.2"
 	},
-	"packageManager": "pnpm@10.6.2+sha512.47870716bea1572b53df34ad8647b42962bc790ce2bf4562ba0f643237d7302a3d6a8ecef9e4bdfc01d23af1969aa90485d4cebb0b9638fa5ef1daef656f6c1b"
+	"packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b"
 }

@@ -8,6 +8,14 @@ describe("TFetchClient Utility Methods", () => {
 	});
 
 	describe("Headers Handling", () => {
+		it("should return empty headers for form/multipart with FormData", () => {
+			const fd = new FormData();
+			fd.append("foo", "bar");
+			const formHeaders = (tfetch as any).getHeaders("form", fd);
+			const multipartHeaders = (tfetch as any).getHeaders("multipart", fd);
+			expect(formHeaders).toEqual({});
+			expect(multipartHeaders).toEqual({});
+		});
 		it("should merge multiple header sources", () => {
 			const headers1 = { "X-Test1": "value1" };
 			const headers2 = { "X-Test2": "value2" };
