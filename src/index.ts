@@ -679,13 +679,15 @@ class TFetchClient {
 			// Let the browser set Content-Type (with boundary)
 			return {};
 		}
+		if (type === "form" || type === "multipart") {
+			// If not FormData, return empty object (no Content-Type)
+			return {};
+		}
 		return (
 			{
 				json: { "Content-Type": "application/json" },
-				form: { "Content-Type": "application/x-www-form-urlencoded" },
 				text: { "Content-Type": "text/plain" },
 				blob: { "Content-Type": "application/octet-stream" },
-				multipart: { "Content-Type": "multipart/form-data" },
 				xml: { "Content-Type": "application/xml" },
 				html: { "Content-Type": "text/html" },
 			}[type] ?? {}
